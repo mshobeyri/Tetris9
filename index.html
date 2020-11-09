@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: http://ogp.me/ns#">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#ddd" />
+    <meta name="description" content="Tetris9 font home page - complete 3*3 ASCII Pixel-based font" />
+    <meta property="og:title" content="Tetris9 font home page - complete 3*3 ASCII Pixel-based font">
+    <meta property="og:site_name" content="Tetris9 font home page - complete 3*3 ASCII Pixel-based font">
+    <meta property="og:description" content="Tetris9 font home page - complete 3*3 ASCII Pixel-based font">
+    <title>Tetris9 font</title>
+    <style>
+        :root {
+            --preview-font-size: 25px;
+            --text-font-size: 25px;
+        }
+
+        *,
+         ::after,
+         ::before {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        *:focus {
+            outline: none;
+        }
+        
+        html,
+        body {
+            height: 100vh;
+        }
+        
+        html {
+            font-size: 12px;
+            line-height: 1.3rem;
+        }
+
+        @font-face {
+            font-family: "Tetris9";
+            src: url("https://github.com/mshobeyri/Tetris9/blob/main/tetris9.ttf?raw=true");
+        }
+        
+        .container {
+            position: relative;
+            display: flex;
+            flex-wrap: wrap;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .container .text, .container .preview {
+            display: flex;
+            width: 50%;
+            padding: 3rem;
+            padding-top: 4rem;
+            font-size: 25px;
+            font-size: var(--preview-font-size);
+            line-height: 2.5rem;
+            line-height: var(--preview-font-size);
+            resize: none;
+        }
+
+        .container .text {
+            font-size: 25px;
+            font-size: var(--text-font-size);
+            line-height: 2.5rem;
+            line-height: var(--text-font-size);
+        }
+
+        .container .text {
+            background-color: #FFC107;
+            resize: none;
+        }
+        
+        
+        .container .preview {
+            background-color: #FF3D00;
+            font-family: "Tetris9";
+            word-break: break-word;
+        }
+
+        @media (max-width: 769px) {
+            .container .preview, .container .text {
+                padding: 0.8rem;
+                padding-top: 6rem;
+            }
+        }
+
+        #info {
+            position: absolute;
+            right: 0;
+            left: 0;
+            top: 0;
+            width: 100vw;
+            font-size: 15px;
+            display: flex;
+            justify-content: center;
+        }
+        #info .data{
+            width: 250px;
+            height: 30px;
+            background-color: #E0E0E0;
+            padding: 0 10px;
+            padding-bottom: 2px;
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
+            text-decoration: none;
+            color: #424242;
+            text-align: center;
+            border: 1px solid #616161;
+        }
+
+        #info a .github-link{
+            color: #1565C0;
+        }
+
+        #preview-increase-size, #preview-decrease-size, #text-increase-size, #text-decrease-size {
+            position: absolute;
+            top: 10px;
+            width: 30px;
+            height: 30px;
+            font-size: 30px;
+            font-weight: bold;
+            background-color: gray;
+            border: 1px solid black;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            cursor: pointer;
+            z-index: 2;
+        }
+
+        #preview-increase-size{
+            right: 10px;
+        }
+
+        #preview-decrease-size{
+            right: 45px;
+        } 
+
+        #text-increase-size {
+            left: 10px;
+        }
+
+        #text-decrease-size {
+            left: 45px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <span id="preview-increase-size">+</span>
+        <span id="preview-decrease-size">-</span>
+        <span id="text-increase-size">+</span>
+        <span id="text-decrease-size">-</span>
+        <span id="info">
+            <a class="data" href="https://github.com/mshobeyri/Tetris9" target="_blank">Tetris9  3*3 pixel-based font.<br><span class="data github-link">See in Github</span></a>
+        </span>
+        <textarea id="textarea" class="text">WRITE YOUR SAMPLE HERE
+
+Hey, how are you?
+        </textarea>
+        <div id="preview" class="preview">WRITE YOUR SAMPLE HERE<br><br>Hey, how are you?
+        </div>
+    </div>
+
+    <script>
+        var previewFontSize = 25;
+        var textFontSize = 25;
+        document.getElementById('textarea').addEventListener("keyup", onChangeTextArea);
+        document.getElementById('preview-increase-size').addEventListener("click", function() {
+            changePreviewFontSize('increase');
+        }); 
+        document.getElementById('preview-decrease-size').addEventListener("click", function() {
+            changePreviewFontSize('decrease');
+        });
+        document.getElementById('text-increase-size').addEventListener("click", function() {
+            changeTextFontSize('increase');
+        }); 
+        document.getElementById('text-decrease-size').addEventListener("click", function() {
+            changeTextFontSize('decrease');
+        });
+
+        function onChangeTextArea(e) {
+            document.getElementById('preview').innerText = e.target.value;
+        }
+
+        function changePreviewFontSize(whatToDo) {
+            if(whatToDo === 'increase') {
+                previewFontSize += 2;
+            } else {
+                previewFontSize -= 2;
+            }
+            document.documentElement.style.setProperty('--preview-font-size', previewFontSize + 'px');
+        }
+        function changeTextFontSize(whatToDo) {
+            if(whatToDo === 'increase') {
+                textFontSize += 2;
+            } else {
+                textFontSize -= 2;
+            }
+            document.documentElement.style.setProperty('--text-font-size', textFontSize + 'px');
+        }
+    </script>
+</body>
+
+</html>
